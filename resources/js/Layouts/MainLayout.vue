@@ -1,5 +1,6 @@
  <template>
  <Link href="/">Index</Link>&nbsp;
+ <Link href="/category">Categories</Link>&nbsp;
  <Link href="/about">About</Link>
 
  <slot>Default</slot>
