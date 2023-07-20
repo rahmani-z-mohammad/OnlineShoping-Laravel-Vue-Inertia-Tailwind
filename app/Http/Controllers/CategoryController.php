@@ -13,7 +13,9 @@ class CategoryController extends Controller
     public function index()
     {
         //dd(Category::all());
-        return inertia('Category/Category', ['categories' => Category::all()]);
+        return inertia('Category/Category', ['categories' =>
+         Category::paginate(5)
+        ]);
     }
 
     /**

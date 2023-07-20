@@ -12,9 +12,4 @@ class IndexController extends Controller
         ]);
     }
 
-    public function about(){
-        return inertia('Index/Index',[
-            'message' => 'Hello Everyone this is the About page!'
-        ]);
-    }
 }
