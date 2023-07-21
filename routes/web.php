@@ -17,6 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
-Route::resource('category', CategoryController::class)
-->only(['index']);
+Route::resource('category', CategoryController::class);
 

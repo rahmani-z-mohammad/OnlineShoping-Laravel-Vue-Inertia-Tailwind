@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         //dd(Category::all());
         return inertia('Category/Category', ['categories' =>
-         Category::paginate(5)
+         Category::orderByDesc('created_at')->paginate(5)
         ]);
     }
 
@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Category/Create');
     }
 
     /**
@@ -31,38 +31,46 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Category::create($request->validate([
+            'name' => 'required'
+        ]));
+
+        return redirect()->route('category.index')
+        ->with('success','Data Inserted Succssfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        return inertia('Category/Edit', [
+            'category' => $category
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->validate([
+            'name' => 'required'
+        ]));
+
+        return redirect()->route('category.index')
+        ->with('success','Data Updated Succssfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->deleteOrFail();
+
+        return redirect()->route('category.index')
+        ->with('danger','Data Deleted Succssfully!');
     }
 }

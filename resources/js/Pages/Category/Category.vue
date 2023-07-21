@@ -2,7 +2,7 @@
   
   <Box class="ml-10 w-1/2">
     <div class="mb-5 flex place-content-end">
-    <button class="btn-outline order-last">+ Add New</button>
+    <Link class="btn-outline order-last" :href="route('category.create')" as="button">+ Add New</Link>
     </div>
     <table class="border-collapse table-auto text-sm w-full">
       <thead>
@@ -17,8 +17,8 @@
         <tr v-for="(category, index) in categories.data">
           <td class="td">{{ index + 1 }}</td>
           <td class="td">{{category.name }}</td>
-          <td class="td"><button class="btn-outline">Edit</button></td>
-          <td class="td"><button class="btn-outline">Delete</button></td>
+          <td class="td"><Link class="btn-outline" :href="route('category.edit', {category: category.id})" as="button">Edit</Link></td>
+          <td class="td"><Link class="btn-outline" :href="route('category.destroy', {category: category.id})" method="delete" as="button">Delete</Link></td>
         </tr>
       </tbody>
     </table>
@@ -32,6 +32,7 @@
 <script setup>
 import Box from '@/Components/UI/Box.vue';
 import Pagination from '@/Components/UI/Pagination.vue';
+import { Link } from '@inertiajs/vue3'
 
 defineProps({
     categories: Object

@@ -10,10 +10,34 @@
   </div>
 </header>
 
+<main class="container mx-auto p-4 w-full">
+
+  <div v-if="flashSuccess" class="mb-4 border rounded-md shadow-sm border-green-600 dark:border-green-900 bg-green-50 dark:bg-green-900 p-2">
+  {{ flashSuccess }}
+  </div>
+
+  <div v-if="flashDanger" class="mb-4 border rounded-md shadow-sm border-red-600 dark:red-green-900 bg-red-50 dark:bg-red-900 p-2">
+  {{ flashDanger }}
+  </div>
+
  <slot>Default</slot>
- 
+</main>
  </template>
 
  <script setup>
-    import { Link } from '@inertiajs/vue3'
+    //with usePage function we can have access to all data that we share through the Inertia Laravel Middleware
+  import {Link, usePage} from '@inertiajs/vue3';
+  import { computed } from '@vue/reactivity';
+
+
+  // page.props.flash.success
+  const page = usePage()
+
+  const flashSuccess = computed(
+    () => page.props.flash.success
+  )
+
+  const flashDanger = computed(
+    () => page.props.flash.danger
+  )
 </script>
