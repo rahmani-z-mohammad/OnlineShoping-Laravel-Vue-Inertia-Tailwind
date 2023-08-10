@@ -8,6 +8,9 @@
             <div class="col-span-6">
             <label class="label">Name</label>
             <input v-model="form.name" type="text" class="input"/>
+            <div v-if="form.errors.name" class="input-error">
+                {{ form.errors.name }}
+            </div>
             </div>
         
             <div class="col-span-6">
